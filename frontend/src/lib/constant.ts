@@ -1,0 +1,1 @@
+export const taskStatus = ['todo','in_progress','done','archived']

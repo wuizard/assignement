@@ -1,0 +1,5 @@
+# 🧩 Task Management Application (Laravel + React)
+
+This project consists of a **Laravel backend API** and a **React frontend using Vite** client.  
+The Laravel Backend handles authentication using Laravel Sanctum and RESTful APIs for Tasks Management,  
+The React Frontend handles interfaces using Shadcn and Tailwind, mutation with React Query, and Axios for API Call
