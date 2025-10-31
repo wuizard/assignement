@@ -57,7 +57,7 @@ yarn dev      # or npm run dev
 
 ## Seeding Data 💻
 
-> currently only for Task. For user it should be register first from API
+currently only for Task. For user it should be register first from API
 
 ```
 php artisan db:seed --class=TaskSeeder
@@ -88,5 +88,5 @@ php artisan db:seed --class=TaskSeeder
 
 ## 👨‍💻 Author
 
-> Wuizard
-> 🌐 github.com/wuizard
+Wuizard
+🌐 github.com/wuizard
