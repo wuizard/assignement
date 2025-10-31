@@ -1,92 +1,80 @@
-# Task Management Application (Laravel + React)
-
-Build a full-stack web application where authenticated users can log in, create, view, update, and delete their personal tasks. A task must be strictly associated with the user who created it, and users cannot view or modify tasks from other users.
-
-## 🚀 Features
-
-🔐 Authentication Laravel
-
-- Register and log in securely using Laravel Sanctum
-- CSRF protection & session-based authentication
-- Only authenticated users can access task-related APIs
-
-✅ Task Management React JS + Vite
-
-- Create, read, update, and delete your personal tasks
-- Tasks are associated with the authenticated user
-- Each task can have multiple sub-todos
-- Filter tasks by title, description, and status
-- Paginated task list with pagination on the frontend
-
-## 💻 Stacks
-
-🧠 Frontend (React + Vite)
-
-- Built using Vite, TypeScript, and React 19
-- Styled with Tailwind CSS and Shadcn/UI
-- API integration with Axios
-- Data mutation using React Query
-- Fully responsive, mobile-friendly design
-- Includes Debounced search and pagination
-
-⚙️ Backend (Laravel)
-
-- RESTful API routes with proper authentication middleware
-- Controllers and Eloquent models for Tasks
-- Custom scopeSearch to search Task title and description
-- TaskSeeder for quick database setup for User it should be registered first
-
-## Backend Setup 💻
-
-```
-cd backend
+<h1 id="task-management-application-laravel--react">Task Management Application (Laravel + React)</h1>
+<p>Build a full-stack web application where authenticated users can log in, create, view, update, and delete their personal tasks. A task must be strictly associated with the user who created it, and users cannot view or modify tasks from other users.</p>
+<h2 id="🚀-features">🚀 Features</h2>
+<p>🔐 Authentication Laravel</p>
+<ul>
+<li>Register and log in securely using Laravel Sanctum</li>
+<li>CSRF protection &amp; session-based authentication</li>
+<li>Only authenticated users can access task-related APIs</li>
+</ul>
+<p>✅ Task Management React JS + Vite</p>
+<ul>
+<li>Create, read, update, and delete your personal tasks</li>
+<li>Tasks are associated with the authenticated user</li>
+<li>Each task can have multiple sub-todos</li>
+<li>Filter tasks by title, description, and status</li>
+<li>Paginated task list with pagination on the frontend</li>
+</ul>
+<h2 id="💻-stacks">💻 Stacks</h2>
+<p>🧠 Frontend (React + Vite)</p>
+<ul>
+<li>Built using Vite, TypeScript, and React 19</li>
+<li>Styled with Tailwind CSS and Shadcn/UI</li>
+<li>API integration with Axios</li>
+<li>Data mutation using React Query</li>
+<li>Fully responsive, mobile-friendly design</li>
+<li>Includes Debounced search and pagination</li>
+</ul>
+<p>⚙️ Backend (Laravel)</p>
+<ul>
+<li>RESTful API routes with proper authentication middleware</li>
+<li>Controllers and Eloquent models for Tasks</li>
+<li>Custom scopeSearch to search Task title and description</li>
+<li>TaskSeeder for quick database setup for User it should be registered first</li>
+</ul>
+<h2 id="backend-setup-💻">Backend Setup 💻</h2>
+<pre><code>cd backend
 cp .env.example .env
 composer install
 php artisan key:generate
 php artisan serve
-```
-
-## FrontEnd Setup 💻
-
-```
-cd frontend
+</code></pre>
+<h2 id="frontend-setup-💻">FrontEnd Setup 💻</h2>
+<pre><code>cd frontend
 cp .env.example .env
 yarn install  # or npm install
 yarn dev      # or npm run dev
-```
-
-## Seeding Data 💻
-
-> currently only for Task. For user it should be register first from API
-
-```
-php artisan db:seed --class=TaskSeeder
-```
-
-## API Routes
-
-### Auth
-
-- POST /register — Register a new user
-- POST /login — Login
-- POST /logout — Revoke current access token
-- GET /api/me — Get current authenticated user
-
-### Tasks
-
-- GET /api/tasks — List tasks
-- POST /api/tasks — Create task
-- GET /api/tasks/{task} — Get a single task by Task ID
-- PUT /api/tasks/{task} — Update task (full)
-- PATCH /api/tasks/{task} — Update task (partial)
-- DELETE /api/tasks/{task} — Delete task
-- PATCH /api/tasks-status/{id} — Update only a task’s status
-
-### Todos
-
-- PATCH /api/todos/{id} — Update a todo status
-
-## 👨‍💻 Author
-
-> Wuizard
-> 🌐 github.com/wuizard
+</code></pre>
+<h2 id="seeding-data-💻">Seeding Data 💻</h2>
+<blockquote>
+<p>currently only for Task. For user it should be register first from API</p>
+</blockquote>
+<pre><code>php artisan db:seed --class=TaskSeeder
+</code></pre>
+<h2 id="api-routes">API Routes</h2>
+<h3 id="auth">Auth</h3>
+<ul>
+<li>POST /register — Register a new user</li>
+<li>POST /login — Login</li>
+<li>POST /logout — Revoke current access token</li>
+<li>GET /api/me — Get current authenticated user</li>
+</ul>
+<h3 id="tasks">Tasks</h3>
+<ul>
+<li>GET /api/tasks — List tasks</li>
+<li>POST /api/tasks — Create task</li>
+<li>GET /api/tasks/{task} — Get a single task by Task ID</li>
+<li>PUT /api/tasks/{task} — Update task (full)</li>
+<li>PATCH /api/tasks/{task} — Update task (partial)</li>
+<li>DELETE /api/tasks/{task} — Delete task</li>
+<li>PATCH /api/tasks-status/{id} — Update only a task’s status</li>
+</ul>
+<h3 id="todos">Todos</h3>
+<ul>
+<li>PATCH /api/todos/{id} — Update a todo status</li>
+</ul>
+<h2 id="👨💻-author">👨‍💻 Author</h2>
+<blockquote>
+<p>Wuizard
+🌐 github.com/wuizard</p>
+</blockquote>
