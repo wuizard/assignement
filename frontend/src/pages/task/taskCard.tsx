@@ -17,10 +17,12 @@ import type { Task } from "@/types/task"
 import type { TodosForm } from "@/types/api"
 
 type TaskCardProps = {
-  data: Task
+  data: Task,
+  setReset: () => void,
+  selected?: boolean
 }
 
-export default function TaskCard({ data }: TaskCardProps) {
+export default function TaskCard({ data, setReset, selected }: TaskCardProps) {
   const total = data.todos?.length ?? 0
   const done = data.todos?.filter((x) => x.done).length ?? 0
   const pct = total > 0 ? Math.round((done / total) * 100) : 0
@@ -43,6 +45,7 @@ export default function TaskCard({ data }: TaskCardProps) {
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: tasksKeys.list() })
       toast("Task deleted")
+      setReset()
     },
     onError: (e: unknown) => {
       const msg = e instanceof Error ? e.message : "There is a server problem"
@@ -56,6 +59,7 @@ export default function TaskCard({ data }: TaskCardProps) {
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: tasksKeys.list() })
       setUpdateStatus(false)
+      setReset()
     },
     onError: (e: unknown) => {
       const msg = e instanceof Error ? e.message : "There is a server problem"
@@ -68,6 +72,7 @@ export default function TaskCard({ data }: TaskCardProps) {
     mutationFn: async ({ id, done }: TodosForm) => updateTodoService({id, done }),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: tasksKeys.list() })
+      setReset()
       // toast("Todolist Updated")
     },
     onError: (e: unknown) => {
@@ -83,7 +88,7 @@ export default function TaskCard({ data }: TaskCardProps) {
 
   return (
     <Card className={cn(
-      "group hover:shadow-md transition-shadow gap-0 py-0"
+      `group hover:shadow-md transition-shadow gap-0 py-0  ${selected ? "border-primary-500 ring-1 ring-primary shadow-md" : "border-gray-200 hover:shadow-sm"}` 
     )}>
       <CardContent className="p-3 sm:p-3 py-4">
         <div className="flex items-start gap-3">
@@ -92,11 +97,13 @@ export default function TaskCard({ data }: TaskCardProps) {
               <div className="min-w-0">
                 <div className="font-medium truncate">{data.title}</div>
                 {data.description ? (
-                  <div className="text-sm text-muted-foreground line-clamp-1">
+                  <div className="text-sm text-muted-foreground line-clamp-1 max-w-[200px]">
                     {data.description}
                   </div>
                 ) : null}
-                <div className="flex gap-1 cursor-pointer mt-2">
+                <div className="flex gap-1 cursor-pointer mt-2" onClick={(e) => {
+                  e.stopPropagation()
+                }}>
                   {data.status ? (
                       <Badge variant="outline" onClick={() => {
                         setUpdateStatus(!updateStatus)
@@ -165,7 +172,7 @@ export default function TaskCard({ data }: TaskCardProps) {
         </div>
         {data.todos && data.todos.length > 0 && (
             <div className="mt-2 space-y-2">
-            <div className="text-xs font-medium text-muted-foreground">Checklist</div>
+            <div className="text-xs font-medium text-muted-foreground">Todo List</div>
 
             <ul className="space-y-1.5">
                 {visibleTodos.map((td) => (
@@ -206,7 +213,7 @@ export default function TaskCard({ data }: TaskCardProps) {
                 </button>
             )}
 
-            {expanded && data.todos.length > 5 && (
+            {expanded && data.todos.length > 2 && (
                 <button
                 type="button"
                 className="text-xs text-muted-foreground underline underline-offset-2 hover:no-underline"

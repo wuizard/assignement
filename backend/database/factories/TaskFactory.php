@@ -25,6 +25,7 @@ class TaskFactory extends Factory
             'description'=> $this->faker->paragraph(),
             'status' => $this->faker->randomElement(['todo','in_progress','done','archived']),
             'deadline' => $hasDeadline ? $this->faker->dateTimeBetween('-10 days', '+30 days') : null,
+            'created_at' => $this->faker->dateTimeBetween('-10 days', '-1 days')
         ];
     }
     public function done(): static {

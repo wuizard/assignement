@@ -1,5 +1,81 @@
-# 🧩 Task Management Application (Laravel + React)
+# Task Management Application (Laravel + React)
 
-This project consists of a **Laravel backend API** and a **React frontend using Vite** client.  
-The Laravel Backend handles authentication using Laravel Sanctum and RESTful APIs for Tasks Management,  
-The React Frontend handles interfaces using Shadcn and Tailwind, mutation with React Query, and Axios for API Call
+Build a full-stack web application where authenticated users can log in, create, view, update, and delete their personal tasks. A task must be strictly associated with the user who created it, and users cannot view or modify tasks from other users.
+
+
+## 🚀 Features
+🔐 Authentication Laravel
+> - Register and log in securely using Laravel Sanctum
+> - CSRF protection & session-based authentication
+> - Only authenticated users can access task-related APIs
+
+✅ Task Management React JS + Vite
+> - Create, read, update, and delete your personal tasks
+> - Tasks are associated with the authenticated user
+> - Each task can have multiple sub-todos
+> - Filter tasks by title, description, and status
+> - Paginated task list with pagination on the frontend
+
+## 💻 Stacks
+🧠 Frontend (React + Vite)
+> - Built using Vite, TypeScript, and React 19
+> - Styled with Tailwind CSS and Shadcn/UI
+> - API integration with Axios
+> - Data mutation using React Query
+> - Fully responsive, mobile-friendly design
+> - Includes Debounced search and pagination
+
+⚙️ Backend (Laravel)
+> - RESTful API routes with proper authentication middleware
+> - Controllers and Eloquent models for Tasks
+> - Custom scopeSearch to search Task title and description
+> - TaskSeeder for quick database setup for User it should be registered first
+
+## Backend Setup 💻
+
+```
+cd backend
+cp .env.example .env
+composer install
+php artisan key:generate
+php artisan serve
+```
+
+## FrontEnd Setup 💻
+
+```
+cd frontend
+cp .env.example .env
+yarn install  # or npm install
+yarn dev      # or npm run dev
+```
+
+## Seeding Data 💻
+>currently only for Task. For user it should be register first from API
+```
+php artisan db:seed --class=TaskSeeder
+```
+
+## API Routes
+### Auth
+>- POST /register — Register a new user
+>- POST /login — Login 
+>- POST /logout — Revoke current access token
+>- GET /api/me — Get current authenticated user
+
+### Tasks
+>- GET /api/tasks — List tasks
+>- POST /api/tasks — Create task
+>- GET /api/tasks/{task} — Get a single task by Task ID
+>- PUT /api/tasks/{task} — Update task (full)
+>- PATCH /api/tasks/{task} — Update task (partial)
+>- DELETE /api/tasks/{task} — Delete task
+>- PATCH /api/tasks-status/{id} — Update only a task’s status
+
+### Todos
+>PATCH /api/todos/{id} — Update a todo status
+
+
+## 👨‍💻 Author
+>Wuizard 
+>🌐 github.com/wuizard

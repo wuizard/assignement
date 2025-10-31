@@ -13,6 +13,7 @@ function Task () {
 
     const [ open, setOpen ] = useState<boolean>(false)
     const [ taskId, setTaskId ] = useState<string>('')
+    const [ reset, setReset ] = useState<string>(Date.now().toString())
     const nav = useNavigate()
     const isMobile = useIsMobile()
 
@@ -21,21 +22,25 @@ function Task () {
         if (!cookie) { nav('/login',  { replace: true }) }
     }, [])
 
+    useEffect(() => {
+        console.log('here reset', reset)
+    }, [reset])
+
     return (
         <>
             <div className="flex flex-col md:flex-row gap-4 p-4 h-full">
                 <Sidebar />
                 <div className="flex-1 md:basis-1/3 md:grow-0 md:shrink-0 space-y-2
                     rounded-md md:border bg-card p-4 h-full">
-                    <TaskList setTaskId={(id) => {
+                    <TaskList taskId={taskId} setTaskId={(id) => {
                         setTaskId(id)
                         if (isMobile) { setOpen(true) }
                     }} setOpen={() => {
                         if (isMobile) { setOpen(true) }
-                    }}/>
+                    }} setReset={() => {setReset(Date.now().toString())}}/>
                 </div>
                 <div className="hidden md:block flex-1 rounded-md p-4">
-                    <TaskEditor taskId={taskId} setOpen={setOpen} />
+                    <TaskEditor taskId={taskId} setOpen={setOpen} reset={reset} />
                 </div>
                 <div className="md:hidden fixed bottom-5 right-5">
                     <Sheet open={open} onOpenChange={() => {
@@ -48,7 +53,7 @@ function Task () {
                             </Button>
                         </SheetTrigger>
                         <SheetContent side="bottom" className="overflow-auto h-[80%] p-4 rounded-t-2xl pt-12">
-                            <TaskEditor taskId={taskId} setOpen={setOpen}/>
+                            <TaskEditor taskId={taskId} setOpen={setOpen} reset={reset}/>
                         </SheetContent>
                     </Sheet>
                 </div>

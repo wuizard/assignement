@@ -22,10 +22,11 @@ import { Badge } from "@/components/ui/badge"
 type TaskEditorProps = {
     taskId: string,
     setOpen: (e: boolean) => void
+    reset: string,
 }
 
 function TaskEditor ({
-    taskId, setOpen
+    taskId, setOpen, reset
 } : TaskEditorProps) {
 
     const qc = useQueryClient()
@@ -52,6 +53,17 @@ function TaskEditor ({
         refetchOnWindowFocus: false,
         staleTime: 0,
     })
+
+    useEffect(() => {
+        console.log('here reset', reset)
+        setForm({
+            title: '',
+            description: '',
+            todos: [],
+            deadline: undefined
+        })
+        setTodos([])
+    }, [reset])
 
     useEffect(() => {
         if (!data) return

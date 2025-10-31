@@ -14,11 +14,13 @@ import { Badge } from "@/components/ui/badge"
 import { prettyStatus, statusBadgeColor } from "@/lib/utils"
 
 type TaskListProps = {
+  taskId: string,
   setTaskId: (id: string) => void,
-  setOpen: () => void
+  setOpen: () => void, 
+  setReset: () => void
 }
 
-export default function TaskList({ setTaskId, setOpen }: TaskListProps) {
+export default function TaskList({ taskId, setTaskId, setOpen, setReset }: TaskListProps) {
 
   const [ query, setQuery ] = useState<string>("")
   const [ status, setStatus ] = useState<string[]>([]);
@@ -47,7 +49,7 @@ export default function TaskList({ setTaskId, setOpen }: TaskListProps) {
   })
 
   const reloadData = async (page: unknown) => {
-    if (page == 1) { setTaskId('') }
+    setTaskId('')
     setPages(page)
     return await taskListService({...params, page})
   }
@@ -126,9 +128,9 @@ export default function TaskList({ setTaskId, setOpen }: TaskListProps) {
             <div
               key={t.id}
               onClick={() => setTaskId(t.id)}
-              className="w-full text-left"
+              className="w-full text-left p-1"
             >
-              <TaskCard data={t} />
+              <TaskCard data={t} setReset={setReset} selected={t.id === taskId}/>
             </div>
           ))}
           {hasNextPage && !isFetchingNextPage && (
