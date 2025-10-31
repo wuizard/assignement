@@ -77,7 +77,6 @@ php artisan db:seed --class=TaskSeeder
 - GET /api/tasks — List tasks
 - POST /api/tasks — Create task
 - GET /api/tasks/{task} — Get a single task by Task ID
-- PUT /api/tasks/{task} — Update task (full)
 - PATCH /api/tasks/{task} — Update task (partial)
 - DELETE /api/tasks/{task} — Delete task
 - PATCH /api/tasks-status/{id} — Update only a task’s status
